@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yugao Zhu · Personal Homepage</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --ink-faint: #8888aa;
+    --paper: #faf9f6;
+    --paper-warm: #f5f3ee;
+    --accent: #003366;
+    --accent-soft: #d0dcea;
+    --accent-red: #c0392b;
+    --link: #1a5276;
+    --border: #e0ddd6;
+    --sidebar-w: 260px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,249,246,0.93);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; gap: 32px;
+    height: 54px;
+  }
+  nav .site-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px; font-weight: 500;
+    color: var(--ink); margin-right: auto;
+    letter-spacing: 0.01em;
+  }
+  nav a {
+    text-decoration: none;
+    font-size: 13.5px; font-weight: 400;
+    color: var(--ink-light);
+    letter-spacing: 0.02em;
+    transition: color .2s;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid transparent;
+  }
+  nav a:hover, nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ─── LAYOUT ─── */
+  .layout {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    position: sticky; top: 78px;
+    text-align: center;
+  }
+  .avatar-wrap {
+    width: 148px; height: 148px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 3px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    background: linear-gradient(135deg, #e8eef5 0%, #c5d5e8 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'EB Garamond', serif;
+    font-size: 52px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .sidebar h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 24px; font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 6px;
+  }
+  .sidebar .tagline {
+    font-size: 13px;
+    color: var(--ink-light);
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  .sidebar-links {
+    display: flex; flex-direction: column; gap: 4px;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+    text-align: left;
+  }
+  .sidebar-links a, .sidebar-links span.nolink {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--ink-light);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    transition: all .18s;
+  }
+  .sidebar-links a:hover {
+    background: var(--paper-warm);
+    color: var(--accent);
+  }
+  .sidebar-links .icon {
+    width: 18px; text-align: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+
+  /* ─── MAIN ─── */
+  .main { min-width: 0; }
+  .section { margin-bottom: 52px; }
+
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 26px; font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title .emoji { font-size: 22px; }
+
+  /* ─── BIO ─── */
+  .bio p {
+    color: var(--ink);
+    margin-bottom: 14px;
+    font-size: 15.5px;
+  }
+  .bio p:last-child { margin-bottom: 0; }
+  .bio a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid #b8cfe8;
+    transition: all .15s;
+  }
+  .bio a:hover { color: var(--accent-red); border-bottom-color: var(--accent-red); }
+
+  /* ─── NEWS ─── */
+  .news-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .news-item {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    transition: background .15s;
+    font-size: 14.5px;
+  }
+  .news-item:hover { background: var(--paper-warm); }
+  .news-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: var(--paper-warm);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .news-text { color: var(--ink-light); line-height: 1.5; }
+  .news-text em {
+    color: var(--accent);
+    font-style: italic;
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+  }
+
+  /* ─── PUBLICATIONS ─── */
+  .pub-list { display: flex; flex-direction: column; gap: 20px; }
+  .pub-item {
+    padding: 20px 22px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    transition: all .2s;
+  }
+  .pub-item:hover {
+    border-color: #b8c8dc;
+    box-shadow: 0 4px 20px rgba(0,0,50,0.07);
+    transform: translateY(-1px);
+  }
+  .pub-venue-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: #fff;
+    background: #2563c7;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-bottom: 11px;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 6px rgba(37,99,199,0.25);
+  }
+  .pub-venue-tag.tcad {
+    background: #c0392b;
+    box-shadow: 0 2px 6px rgba(192,57,43,0.25);
+  }
+  .pub-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 9px;
+    color: var(--ink);
+  }
+  .pub-authors {
+    font-size: 13.5px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+  .pub-authors .me {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 2px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .sidebar   { animation: fadeUp .5s ease both; }
+  .section:nth-child(1) { animation: fadeUp .5s .1s ease both; }
+  .section:nth-child(2) { animation: fadeUp .5s .2s ease both; }
+  .section:nth-child(3) { animation: fadeUp .5s .3s ease both; }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; gap: 32px; }
+    .sidebar { position: static; }
+    nav { padding: 0 20px; }
+    .layout { padding: 28px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="site-name">Yugao Zhu's Homepage</span>
+  <a href="#about" class="active">About</a>
+  <a href="#news">News</a>
+  <a href="#publications">Publications</a>
+</nav>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="avatar-wrap">
+      <img src="photo.webp" alt="Yugao Zhu" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <h1>Yugao Zhu</h1>
+    <p class="tagline">Ph.D. Candidate<br>HKUST · Electronic &amp; Computer Engineering</p>
+    <div class="sidebar-links">
+      <span class="nolink"><span class="icon">📍</span>Hong Kong</span>
+      <span class="nolink"><span class="icon">🏛</span>HKUST</span>
+      <a href="/cdn-cgi/l/email-protection#6e5d595a5e5d565956572e1f1f400d0103"><span class="icon">✉️</span><span class="__cf_email__" data-cfemail="0231353632313a353a3b4273732c616d6f">[email&#160;protected]</span></a>
+      <a href="https://github.com/zyg18/" target="_blank"><span class="icon">🐙</span>GitHub</a>
+      <a href="https://cn.linkedin.com/in/yugao-zhu-a3359a258" target="_blank"><span class="icon">💼</span>LinkedIn</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ABOUT -->
+    <section id="about" class="section bio">
+      <h2 class="section-title">About Me</h2>
+      <p>
+        Hello! I'm <strong>Yugao Zhu (朱余高)</strong>, a third-year Ph.D. student in the
+        Department of Electronic and Computer Engineering at the
+        <strong>Hong Kong University of Science and Technology (HKUST)</strong>,
+        advised by <a href="https://zhiyaoxie.com/" target="_blank">Prof. Zhiyao Xie</a>.
+      </p>
+      <p>
+        My research lies in <strong>hypergraph partitioning</strong> — developing efficient, scalable algorithms
+        and frameworks for large-scale chip design automation. I am also broadly interested
+        in the application of <strong>large language models (LLMs)</strong> to EDA and
+        other domains.
+      </p>
+      <p>
+        Prior to HKUST, I received my Bachelor's degree from the
+        <strong>Department of Electronic Engineering</strong> at
+        <strong>Tsinghua University</strong>.
+      </p>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news" class="section">
+      <h2 class="section-title"><span class="emoji">🔥</span>News</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">2026-02</span>
+          <span class="news-text">Two papers accepted to <em>DAC 2026</em> 🎉</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2026-01</span>
+          <span class="news-text">Two papers accepted to <em>TCAD 2026</em></span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" class="section">
+      <h2 class="section-title"><span class="emoji">📄</span>Publications</h2>
+      <p style="font-size:13.5px;color:var(--ink-faint);margin-bottom:22px;">
+        * denotes corresponding author.
+      </p>
+
+      <div class="pub-list">
+
+        <div class="pub-item">
+          <span class="pub-venue-tag">DAC '26</span>
+          <div class="pub-title">
+            IMPart: Integration of Memetic Operations into Multi-Level Framework for Large-<i>k</i>-Way Hypergraph Partitioning
+          </div>
+          <div class="pub-authors">
+            <span class="me">Yugao Zhu</span>, Zhicheng Guo, Shang Liu, Mengming Li, Jing Wang, and Zhiyao Xie*
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <span class="pub-venue-tag">DAC '26</span>
+          <div class="pub-title">
+            ComPart: Community-Guided Post-Coarsening for High-Quality Hypergraph Partitioning
+          </div>
+          <div class="pub-authors">
+            <span class="me">Yugao Zhu</span>, Zhicheng Guo, Yuchao Wu, Mengming Li, Jing Wang, and Zhiyao Xie*
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <span class="pub-venue-tag tcad">TCAD '26</span>
+          <div class="pub-title">
+            MFSPart: A Generalized Partitioning Framework for Multi-FPGA Systems and Its Ensemble-Based Extension
+          </div>
+          <div class="pub-authors">
+            <span class="me">Yugao Zhu</span>, Wenji Fang, Yao Lu, Shang Liu, Yanzhen Zhu, Qijun Zhang, and Zhiyao Xie*
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <span class="pub-venue-tag tcad">TCAD '26</span>
+          <div class="pub-title">
+            A Self-Supervised and Cross-Design Netlist Power Model for Time-Based Layout Power Analysis
+          </div>
+          <div class="pub-authors">
+            Wenkai Li, Yao Lu, Wenji Fang, <span class="me">Yugao Zhu</span>, Ziyan Guo, Jing Wang, Mengming Li, Qijun Zhang, and Zhiyao Xie*
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  © 2026 Yugao Zhu &nbsp;·&nbsp; Last updated: February 2026
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIn
