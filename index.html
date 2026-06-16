@@ -10,14 +10,14 @@
     --ink: #1a1a2e;
     --ink-light: #4a4a6a;
     --ink-faint: #8888aa;
-    --paper: #faf9f6;
-    --paper-warm: #f5f3ee;
+    --paper: #ffffff;
+    --paper-warm: #f5f6f8;
     --accent: #003366;
     --accent-soft: #d0dcea;
     --accent-red: #c0392b;
     --link: #1a5276;
-    --border: #e0ddd6;
-    --sidebar-w: 260px;
+    --border: #e6e6ea;
+    --sidebar-w: 280px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +34,7 @@
   /* ─── NAV ─── */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(250,249,246,0.93);
+    background: rgba(255,255,255,0.93);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 40px;
@@ -63,25 +63,25 @@
 
   /* ─── LAYOUT ─── */
   .layout {
-    max-width: 1060px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 48px 40px 80px;
+    padding: 56px 56px 80px;
     display: grid;
     grid-template-columns: var(--sidebar-w) 1fr;
-    gap: 60px;
+    gap: 72px;
     align-items: start;
   }
 
   /* ─── SIDEBAR ─── */
   .sidebar {
     position: sticky; top: 78px;
-    text-align: center;
+    text-align: left;
   }
   .avatar-wrap {
-    width: 148px; height: 148px;
+    width: 168px; height: 168px;
     border-radius: 50%;
     overflow: hidden;
-    margin: 0 auto 20px;
+    margin: 0 0 22px;
     border: 3px solid var(--border);
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     background: linear-gradient(135deg, #e8eef5 0%, #c5d5e8 100%);
@@ -256,11 +256,10 @@
   .section:nth-child(2) { animation: fadeUp .5s .2s ease both; }
   .section:nth-child(3) { animation: fadeUp .5s .3s ease both; }
 
-  @media (max-width: 720px) {
-    .layout { grid-template-columns: 1fr; gap: 32px; }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; gap: 32px; padding: 28px 24px 60px; }
     .sidebar { position: static; }
-    nav { padding: 0 20px; }
-    .layout { padding: 28px 20px 60px; }
+    nav { padding: 0 24px; }
   }
 </style>
 </head>
@@ -287,7 +286,7 @@
       <span class="nolink"><span class="icon">🏛</span>HKUST</span>
       <a href="mailto:yzhuel@connect.ust.hk"><span class="icon">✉️</span>yzhuel@connect.ust.hk</a>
       <a href="https://github.com/zyg18/" target="_blank"><span class="icon">🐙</span>GitHub</a>
-      <a href="https://cn.linkedin.com/in/yugao-zhu-a3359a258" target="_blank"><span class="icon">💼</span>LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=dK7J-iwAAAAJ&hl=en" target="_blank"><span class="icon">🎓</span>Google Scholar</a>
     </div>
   </aside>
 
@@ -388,7 +387,7 @@
   © 2026 Yugao Zhu &nbsp;·&nbsp; Last updated: February 2026
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
@@ -400,4 +399,13 @@
   const navLinks = document.querySelectorAll('nav a[href^="#"]');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(en => {
-      if (en.isIn
+      if (en.isIntersecting) {
+        const id = en.target.getAttribute('id');
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
